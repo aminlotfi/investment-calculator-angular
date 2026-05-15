@@ -25,6 +25,9 @@ export class FormComponent {
       duration: +this.duration(),
     })
 
-    console.log(this.investmentService.investmentResults())
+    this.initialInvestment.set('')
+    this.annualInvestment.set('')
+    this.expectedReturn.set('5')
+    this.duration.set('10')
   }
 }
