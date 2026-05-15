@@ -1,5 +1,6 @@
 import {Component, signal} from '@angular/core';
-import {FormGroup, FormsModule} from "@angular/forms";
+import {FormsModule} from "@angular/forms";
+import {InvestmentService} from "../investment.service";
 
 @Component({
   selector: 'app-form',
@@ -14,7 +15,16 @@ export class FormComponent {
   expectedReturn = signal('5')
   duration = signal('10')
 
+  constructor(private investmentService: InvestmentService) {}
+
   onSubmit() {
-    console.log('form submitted', this.initialInvestment(), this.annualInvestment(), this.expectedReturn(), this.duration());
+    this.investmentService.calculateInvestmentResults({
+      initialInvestment: +this.initialInvestment(),
+      annualInvestment: +this.annualInvestment(),
+      expectedReturn: +this.expectedReturn(),
+      duration: +this.duration(),
+    })
+
+    console.log(this.investmentService.investmentResults())
   }
 }
